@@ -19,9 +19,17 @@ pipeline {
                 }
             }
         }
+        
+       stage ('Package Stage') {
 
+            steps {
+                withMaven(maven : 'Localmaven') {
+                    sh 'mvn package'
+                }
+            }
+        }
 
-        stage ('Deployment Stage') {
+       stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'Localmaven') {
                     sh 'mvn install'
